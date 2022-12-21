@@ -1,29 +1,160 @@
-
-body {
-    /* Prevents things from being highlighted */
-    -webkit-user-select: none; /* Safari */
-    -ms-user-select: none; /* IE 10 and IE 11 */
-    user-select: none; /* Standard syntax */
-
-    height: 100vh;
-    width: 100vw;
-    background-color: black;
-    margin: 0rem;
-    overflow: hidden;
+body, main{
+  height: 100vh;
+  width: 100vw;
+  margin: 0px;
+  background-color: black;
+}
+main {
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  z-index: 2;
+  transition: transform 500ms cubic-bezier(.13, .53, .38, .97);
+  overflow-x: hidden;
+}
+.index-bg{
+  background-image: url("https://images.unsplash.com/photo-1493863641943-9b68992a8d07?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1158&q=80");
 }
 
-#image-track > .image {
-    width: 40vmin;
-    height: 56vmin;
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 4rem 1px;
+  }
+
+  /* Create four equal columns that sits next to each other */
+
+  .column {
+    flex: 32%;
+    padding: 0 1vmin;
+    max-width: 24%;
+  }
+  
+  .column > img {
     object-fit: cover;
-    object-position: 100% 50%;
-}
+    width: 100%;
+    margin-top: 2vmin;
+    position: relative;
+  }
 
-#image-track {
-    display:flex;
-    gap: 4vmin;
+  .image{
+    z-index: 2;
+  }
+
+  #nav-toggle {
+    height: 5rem;
+    width: 5rem;
+    position: fixed;
+    bottom: 3rem;
+    z-index: 5;
+    left: 50%;
+    background-color: rgb(182, 142, 113);
+    border: none;
+    border-radius: 5rem;
+    outline: none;
+    box-shadow: 0rem 0rem 4rem rgba(0 0 0 / 35%);
+    cursor: pointer;
+    transition: transform, background-color;
+    transition-timing-function: ease;
+    transition-duration: 400ms;
+  }
+
+  #nav-toggle:hover {
+    transform: scale(1.15);
+  }
+
+  #nav-toggle:active {
+    transform: scale(0.85);
+  }
+
+  #nav-toggle > i {
     position: absolute;
     left: 50%;
     top: 50%;
-    transform: translate(0%, -50%);
+    transform: translate(-50%, -50%) scale(1.4);
+    color: rgb(246, 231, 224);
+    font-size: 1.75rem;
+    opacity: 0;
+    transition: transform, opacity;
+    transition-timing-function: ease;
+    transition-duration: 400ms;
+  }
+
+  body[data-nav="true"] > #nav-toggle > .close {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+
+  body[data-nav="false"] > #nav-toggle:hover > .open {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+
+  body[data-nav="true"] > main {
+    transform: translateY(-50%);
+    overflow: hidden;
+  }
+  
+  body[data-nav="true"] > nav > #nav-links {
+    transform: translateY(0%) translateX(2%) scale(1);
+  }
+
+  body[data-nav="true"] > nav{
+    z-index: 3;
+  }
+
+  #nav-links > .nav-link {
+    text-decoration: none;
+  }
+
+  #nav-links > .nav-link > .nav-link-label {
+    color: white;
+    font-size: 1.25rem;
+    margin: 0rem;
+    text-transform: uppercase;
+  }
+
+  #nav-links > .nav-link > .nav-link-image {
+    width: max(20vw, 400px);
+    aspect-ratio: 1.8 / 1;
+    border-radius: 0.5rem;
+    object-fit: cover;
+  }
+
+nav{
+  overflow: hidden;
+  height: 50vh;
+  width: 100%;
+  position: absolute;
+  left: 0px;
+  bottom: 0px;
 }
+
+#nav-links{
+  display: flex;
+  gap: clamp(1rem, 2vw, 2rem);
+  margin-top: clamp(2rem, 2vw, 3rem);
+  padding: 0rem clamp(1rem, 2vw, 2rem);
+  transform: translateY(70%) scale(0.9);
+  transition: transform 500ms cubic-bezier(.13,.53,.38,.97);
+}
+
+  
+  /* Responsive layout - makes a two column-layout instead of four columns */
+  /*
+  @media screen and (max-width: 800px) {
+    .column {
+      flex: 50%;
+      max-width: 50%;
+    }
+  }
+  */
+  /* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
+    /*
+  @media screen and (max-width: 600px) {
+    .column {
+      flex: 100%;
+      max-width: 100%;
+    }
+  }
+  */
